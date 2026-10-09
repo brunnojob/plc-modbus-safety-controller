@@ -33,7 +33,8 @@ public:
   std::vector<std::uint8_t> process(const std::vector<std::uint8_t> &request,
                                     const Inputs &inputs, std::uint32_t now) {
     if (request.size() < 8 || request.size() > 260 || word(request, 2) != 0 ||
-        word(request, 4) + 6 != request.size() || request[6] != unit_)
+        static_cast<std::size_t>(word(request, 4)) + 6 != request.size() ||
+        request[6] != unit_)
       throw std::invalid_argument("invalid MBAP frame");
     std::uint8_t function = request[7];
     auto fail = [&](std::uint8_t code) {
@@ -86,3 +87,4 @@ public:
     return fail(1);
   }
 };
+
