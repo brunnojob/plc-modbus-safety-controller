@@ -9,3 +9,7 @@ enable_testing()
 add_executable(plc_tests tests/motor_test.cpp)
 target_link_libraries(plc_tests PRIVATE plc_reference)
 add_test(NAME plc_tests COMMAND plc_tests)
+
+add_executable(modbus_test tests/modbus_test.cpp)
+target_link_libraries(modbus_test PRIVATE plc_reference)
+add_test(NAME modbus COMMAND modbus_test)
