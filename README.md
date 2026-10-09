@@ -18,8 +18,14 @@ Function 3 reads registers; function 6 restricts writes to the authorized comman
 
 ## Optional report archive
 
-Use the [shared operations archive client](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/cloud) to queue `result.json` under project `plc-modbus-safety-controller`. The client uses `BRUNNODEV_ACCESS_TOKEN` and retains unacknowledged reports locally.
+Use the [native C operations archive client](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/clients/c) to queue `result.json` under project `plc-modbus-safety-controller`. The client uses `BRUNNODEV_ACCESS_TOKEN` and retains unacknowledged reports locally.
 
 ## License
 
 Original source and documentation are MIT licensed; see [LICENSE](LICENSE). Third-party dependencies and media retain their respective terms. Maintained by [Brunno Dev](https://brunnodev.store).
+
+## Implementation update
+
+The C++ motor controller uses wrap-safe elapsed time across 32-bit clock rollover and rebases regressing clocks during transitions. Native tests verify rollover and stop timing. The Structured Text implementation remains available for PLC toolchains.
+
+Contribution trailer: `Co-authored-by: nyctophile <33561761+ineedfoundmyway@users.noreply.github.com>`.

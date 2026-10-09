@@ -33,13 +33,8 @@ MotorState MotorController::scan(const Inputs &inputs, std::uint32_t nowMs) {
     return state_;
   }
 
-  // Proteção robusta contra regressão de relógio (clock jump backwards)
-  std::uint32_t elapsed = 0;
-  if (nowMs >= stateSinceMs_) {
-    elapsed = nowMs - stateSinceMs_;
-  } else {
-    // Se o relógio retrocedeu, reseta o tempo decorrido para evitar bloqueio do
-    // estado
+  std::uint32_t elapsed = nowMs - stateSinceMs_;
+  if (elapsed >= 0x80000000U) {
     stateSinceMs_ = nowMs;
     elapsed = 0;
   }
