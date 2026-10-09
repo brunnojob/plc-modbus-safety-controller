@@ -18,7 +18,7 @@ Function 3 reads registers; function 6 restricts writes to the authorized comman
 
 ## Optional report archive
 
-Export a JSON report from the command above, then run `python cloud/sync.py enqueue result.json --project plc-modbus-safety-controller` and `python cloud/sync.py sync`. Synchronization requires `BRUNNODEV_ACCESS_TOKEN` and the external operations API; the local outbox retains unacknowledged reports.
+Use the [shared operations archive client](https://github.com/brunnojob/vercel-home-telemetry-api/tree/main/cloud) to queue `result.json` under project `plc-modbus-safety-controller`. The client uses `BRUNNODEV_ACCESS_TOKEN` and retains unacknowledged reports locally.
 
 ## License
 
