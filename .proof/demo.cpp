@@ -1,6 +1,7 @@
 #include "motor.hpp"
 #include <cassert>
 #include <iostream>
+#include <stdexcept>
 int main() {
     MotorController motor;
     Inputs healthy{false, true, true, false};
@@ -10,8 +11,9 @@ int main() {
     assert(run == MotorState::Running);
     auto trip = motor.scan({true, true, true, false}, 5001);
     assert(trip == MotorState::Tripped);
-    auto denied = motor.reset({true, true, true, false}, 5002);
-    assert(denied == MotorState::Tripped);
+    bool denied = false;
+    try { motor.reset({true, true, true, false}, 5002); } catch (const std::logic_error &) { denied = true; }
+    assert(denied && motor.state() == MotorState::Tripped);
     auto reset = motor.reset(healthy, 5003);
     assert(reset == MotorState::Stopped);
     std::cout << "{\"starting\":true,\"running\":true,\"emergency_stop_trip\":true,\"unsafe_reset_denied\":true,\"healthy_reset\":true}\n";
