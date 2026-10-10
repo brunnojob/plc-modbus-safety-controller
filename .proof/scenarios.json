@@ -1,0 +1,76 @@
+{
+  "repository": "brunnojob/plc-modbus-safety-controller",
+  "inputs": [
+    ".proof/scenarios.json",
+    ".proof/demo.cpp"
+  ],
+  "cases": [
+    {
+      "name": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "timeout": 900,
+      "display": false
+    },
+    {
+      "name": "cmake --build build --parallel 2",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "cmake --build build --parallel 2"
+      ],
+      "timeout": 900,
+      "display": false
+    },
+    {
+      "name": "ctest --test-dir build --output-on-failure",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "ctest --test-dir build --output-on-failure"
+      ],
+      "timeout": 900,
+      "display": true
+    },
+    {
+      "name": "Compile motor transition demonstration",
+      "argv": [
+        "g++",
+        "-std=c++20",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Iinclude",
+        ".proof/demo.cpp",
+        "src/motor.cpp",
+        "-o",
+        "build/proof-demo"
+      ],
+      "contains": [],
+      "timeout": 120
+    },
+    {
+      "name": "Demonstrate emergency trip and guarded reset",
+      "argv": [
+        "build/proof-demo"
+      ],
+      "contains": [
+        "\"emergency_stop_trip\":true",
+        "\"unsafe_reset_denied\":true"
+      ],
+      "timeout": 120
+    }
+  ]
+}
