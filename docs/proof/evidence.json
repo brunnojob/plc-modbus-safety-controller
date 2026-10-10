@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "repository": "brunnojob/plc-modbus-safety-controller",
+  "source_commit": "1677fbf6d25c3b2ae1e3f8d2fc30580c18ff867d",
+  "generated_at": "2026-10-10T02:42:43.519202+00:00",
+  "run_url": "https://github.com/brunnojob/plc-modbus-safety-controller/actions/runs/38017950668",
+  "inputs_sha256": {
+    ".proof/scenarios.json": "cb66871b795db755950e409b3b5a66fb13cb6cd7e569f89a6f4495d8ecd8dad4",
+    ".proof/demo.cpp": "1cd4af7432c0742a0b76b8c9fecb3a7671a8c8f0524663543db83f108973078c"
+  },
+  "cases": [
+    {
+      "display": false,
+      "name": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "seconds": 4.414,
+      "output": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done (4.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build\n",
+      "output_sha256": "fd97b3d73ec76c17966054fee951f4e14d524cff0fcd5a9288e949bf46281d57"
+    },
+    {
+      "display": false,
+      "name": "cmake --build build --parallel 2",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "cmake --build build --parallel 2"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "seconds": 3.01,
+      "output": "[ 16%] Building CXX object CMakeFiles/plc_reference.dir/src/motor.cpp.o\n[ 33%] Linking CXX static library libplc_reference.a\n[ 33%] Built target plc_reference\n[ 50%] Building CXX object CMakeFiles/plc_tests.dir/tests/motor_test.cpp.o\n[ 66%] Building CXX object CMakeFiles/modbus_test.dir/tests/modbus_test.cpp.o\n[ 83%] Linking CXX executable plc_tests\n[ 83%] Built target plc_tests\n[100%] Linking CXX executable modbus_test\n[100%] Built target modbus_test\n",
+      "output_sha256": "d98f225d9df9c69ee68a59472efcf755c2cf117dc488e1ab80d1dda894fa9531"
+    },
+    {
+      "display": true,
+      "name": "ctest --test-dir build --output-on-failure",
+      "argv": [
+        "bash",
+        "-e",
+        "-o",
+        "pipefail",
+        "-c",
+        "ctest --test-dir build --output-on-failure"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "seconds": 1.656,
+      "output": "Internal ctest changing into directory: /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build\nTest project /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build\n    Start 1: plc_tests\n1/2 Test #1: plc_tests ........................   Passed    0.00 sec\n    Start 2: modbus\n2/2 Test #2: modbus ...........................   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.14 sec\n",
+      "output_sha256": "ba32c6705912f56a2cffa8ab78631d141a8ae9fb579836cf2f9c68a0414a56be"
+    },
+    {
+      "display": true,
+      "name": "Compile motor transition demonstration",
+      "argv": [
+        "g++",
+        "-std=c++20",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Iinclude",
+        ".proof/demo.cpp",
+        "src/motor.cpp",
+        "-o",
+        "build/proof-demo"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "seconds": 0.703,
+      "output": "",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "display": true,
+      "name": "Demonstrate emergency trip and guarded reset",
+      "argv": [
+        "build/proof-demo"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "seconds": 0.051,
+      "output": "{\"starting\":true,\"running\":true,\"emergency_stop_trip\":true,\"unsafe_reset_denied\":true,\"healthy_reset\":true}\n",
+      "output_sha256": "8a99ad41f8c33e168c4458638123ed7acd472547df7391257bc740af905f1341"
+    }
+  ],
+  "passed": true
+}

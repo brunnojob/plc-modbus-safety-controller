@@ -1,0 +1,38 @@
+$ bash -e -o pipefail -c cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (4.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build
+
+$ bash -e -o pipefail -c cmake --build build --parallel 2
+[ 16%] Building CXX object CMakeFiles/plc_reference.dir/src/motor.cpp.o
+[ 33%] Linking CXX static library libplc_reference.a
+[ 33%] Built target plc_reference
+[ 50%] Building CXX object CMakeFiles/plc_tests.dir/tests/motor_test.cpp.o
+[ 66%] Building CXX object CMakeFiles/modbus_test.dir/tests/modbus_test.cpp.o
+[ 83%] Linking CXX executable plc_tests
+[ 83%] Built target plc_tests
+[100%] Linking CXX executable modbus_test
+[100%] Built target modbus_test
+
+$ bash -e -o pipefail -c ctest --test-dir build --output-on-failure
+Internal ctest changing into directory: /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build
+Test project /home/runner/work/plc-modbus-safety-controller/plc-modbus-safety-controller/build
+    Start 1: plc_tests
+1/2 Test #1: plc_tests ........................   Passed    0.00 sec
+    Start 2: modbus
+2/2 Test #2: modbus ...........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.14 sec
+
+$ g++ -std=c++20 -Wall -Wextra -Werror -Iinclude .proof/demo.cpp src/motor.cpp -o build/proof-demo
+
+$ build/proof-demo
+{"starting":true,"running":true,"emergency_stop_trip":true,"unsafe_reset_denied":true,"healthy_reset":true}
