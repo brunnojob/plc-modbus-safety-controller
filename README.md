@@ -28,7 +28,7 @@ Original source and documentation are MIT licensed; see [LICENSE](LICENSE). Thir
 
 The C++ motor controller uses wrap-safe elapsed time across 32-bit clock rollover and rebases regressing clocks during transitions. Native tests verify rollover and stop timing. The Structured Text implementation remains available for PLC toolchains.
 
-Contribution trailer: `Co-authored-by: nyctophile <329826984+ineedfoundmyway@users.noreply.github.com>`.
+Contribution trailer: `Co-authored-by: nyctophile <33561761+ineedfoundmyway@users.noreply.github.com>`.
 
 ## Execution proof
 
