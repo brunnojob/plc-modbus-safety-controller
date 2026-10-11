@@ -1,5 +1,7 @@
 # PLC Modbus Controller
 
+[View execution evidence](https://brunnojob.github.io/devstart-lab/proofs/plc-modbus-safety-controller/)
+
 A motor state machine with interlocks, a Structured Text reference, and Modbus TCP frame processing.
 
 ## Run
